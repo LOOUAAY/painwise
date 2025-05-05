@@ -13,6 +13,12 @@ export default defineConfig(({ mode }) => ({
     }
   },
   server: {
+    allowedHosts: [
+      'localhost',
+      '127.0.0.1',
+      '[::1]',
+      'devserver-main--*.netlify.app'
+    ],
     proxy: {
       '/api': {
         target: 'http://localhost/app',

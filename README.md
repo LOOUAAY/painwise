@@ -45,7 +45,20 @@ If you're experiencing a white screen after deployment, try these solutions:
    - For local testing with XAMPP, use `http://localhost/app/api`
    - For production, use your actual API endpoint
 
-3. **Routing Issues**:
+3. **CORS and Host Blocking Issues**:
+   - If you see errors like "Blocked request. This host is not allowed", you need to add your Netlify domain to the allowed hosts in `vite.config.js`:
+     ```js
+     server: {
+       allowedHosts: [
+         'localhost',
+         'your-site-name.netlify.app'
+       ],
+       // other server config...
+     }
+     ```
+   - Replace `your-site-name.netlify.app` with your actual Netlify domain
+
+4. **Routing Issues**:
    - The application uses client-side routing with React Router
    - Ensure the `_redirects` file is properly configured in your `public` folder
    - You can also configure redirects in `netlify.toml` file at the root of your project:
@@ -56,7 +69,7 @@ If you're experiencing a white screen after deployment, try these solutions:
        status = 200
      ```
 
-4. **Build Issues**:
+5. **Build Issues**:
    - Try rebuilding the project with `npm run build` locally
    - Check for any build errors
    - Review Netlify build logs for deployment errors
