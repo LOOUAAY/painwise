@@ -2,7 +2,11 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 
-export default defineConfig(({ mode }) => ({
+export default defineConfig(({ mode }) => {
+  // Determine if we're in production mode
+  const isProd = mode === 'production';
+  
+  return {
   // Load env variables based on mode
   envDir: '.',
   base: '/',
@@ -34,6 +38,11 @@ export default defineConfig(({ mode }) => ({
       }
     }
   },
+  define: {
+    // Add global variables for environment detection
+    'import.meta.env.VERCEL': JSON.stringify(!!process.env.VERCEL),
+    'process.env.VERCEL': JSON.stringify(!!process.env.VERCEL)
+  },
   build: {
     outDir: 'dist',
     emptyOutDir: true,
@@ -42,5 +51,11 @@ export default defineConfig(({ mode }) => ({
         main: './index.html'
       }
     }
+  },
+  define: {
+    // Add global variables for environment detection
+    'import.meta.env.VERCEL': JSON.stringify(!!process.env.VERCEL),
+    'process.env.VERCEL': JSON.stringify(!!process.env.VERCEL)
   }
-}))
+};
+})

@@ -4,39 +4,71 @@ const API_BASE = import.meta.env.VITE_API_BASE_URL ||
 
 console.log('Using API base URL:', API_BASE);
 
+// Determine if we're running on Vercel
+const isVercel = typeof window !== 'undefined' && 
+  window.location.hostname.includes('vercel.app');
+
 const handleResponse = async (response) => {
+  // Handle 405 Method Not Allowed errors specifically
+  if (response.status === 405) {
+    console.error('405 Method Not Allowed error. This often happens with CORS or server configuration issues.');
+    throw new Error('Server configuration error. Please contact support.');
+  }
+  
   let data;
   try {
     data = await response.json();
   } catch (e) {
+    console.error('JSON parsing error:', e);
     throw new Error('Invalid JSON response');
   }
+  
   if (!response.ok || data.success === false) {
-    throw new Error(data.error || 'An error occurred');
+    const errorMsg = data.error || `API error: ${response.status} ${response.statusText}`;
+    console.error('API error:', errorMsg);
+    throw new Error(errorMsg);
   }
   return data;
+};
+
+// Helper function to add common request options
+const createRequestOptions = (method, body = null) => {
+  const options = {
+    method,
+    headers: { 'Content-Type': 'application/json' },
+    // Use mode: 'cors' for cross-origin requests
+    mode: 'cors'
+  };
+  
+  if (body) {
+    options.body = JSON.stringify(body);
+  }
+  
+  return options;
 };
 
 export const api = {
   // Auth
   login: async (credentials) => {
-    const response = await fetch(`${API_BASE}/login_patient.php`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(credentials)
-      // Removed credentials: 'include' to fix CORS issues
-    });
-    return handleResponse(response);
+    try {
+      console.log('Attempting patient login with API base:', API_BASE);
+      const response = await fetch(`${API_BASE}/login_patient.php`, createRequestOptions('POST', credentials));
+      return handleResponse(response);
+    } catch (error) {
+      console.error('Patient login error:', error);
+      throw error;
+    }
   },
 
   loginDoctor: async (credentials) => {
-    const response = await fetch(`${API_BASE}/login_doctor.php`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(credentials)
-      // Removed credentials: 'include' to fix CORS issues
-    });
-    return handleResponse(response);
+    try {
+      console.log('Attempting doctor login with API base:', API_BASE);
+      const response = await fetch(`${API_BASE}/login_doctor.php`, createRequestOptions('POST', credentials));
+      return handleResponse(response);
+    } catch (error) {
+      console.error('Doctor login error:', error);
+      throw error;
+    }
   },
 
   register: async (userData) => {
