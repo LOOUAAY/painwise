@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --mode production",
+    "build": "chmod +x node_modules/.bin/vite && vite build --mode production",
     "preview": "vite preview"
   },
   "dependencies": {
