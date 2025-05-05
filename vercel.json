@@ -15,6 +15,23 @@
       ]
     }
   ],
+  "routes": [
+    {
+      "src": "/api/signup_doctor.php",
+      "dest": "/api/signup_doctor.php",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/api/login_doctor.php",
+      "dest": "/api/login_doctor.php",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/api/login_patient.php",
+      "dest": "/api/login_patient.php",
+      "methods": ["POST"]
+    }
+  ],
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": "vite"
