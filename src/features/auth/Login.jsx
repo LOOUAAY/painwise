@@ -157,18 +157,29 @@ export default function Login() {
       // Use the API service based on the selected role
       let response;
       try {
+        console.log(`Attempting ${selectedRole} login...`);
         response = selectedRole === 'patient' 
           ? await api.login(form)
           : await api.loginDoctor(form);
       } catch (apiError) {
         console.error('API error:', apiError);
-        setError('Login failed. Please check your credentials.');
+        
+        // Check for specific error types
+        if (apiError.message && apiError.message.includes('405')) {
+          setError('Server configuration error (405 Method Not Allowed). This often happens when deploying to Vercel. Please ensure your API endpoints are properly configured.');
+        } else if (apiError.message && apiError.message.includes('Invalid JSON')) {
+          setError('Invalid response from server. This may be due to CORS issues or server misconfiguration.');
+        } else {
+          setError('Login failed. Please check your credentials and try again.');
+        }
+        
         setLoading(false);
         return;
       }
       
       // Check if we have a successful response with user data
       if (response && response.user) {
+        console.log('Login successful, user data received:', response.user);
         // Call the AuthContext login with role and user data
         const loginSuccess = login(selectedRole, response.user);
         
@@ -185,6 +196,7 @@ export default function Login() {
           setError('Failed to set user session. Please try again.');
         }
       } else {
+        console.error('Invalid response structure:', response);
         setError('Invalid response from server. Please try again.');
       }
     } catch (err) {

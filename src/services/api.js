@@ -72,13 +72,14 @@ export const api = {
   },
 
   register: async (userData) => {
-    const response = await fetch(`${API_BASE}/register_patient.php`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(userData)
-      // Removed credentials: 'include' to fix CORS issues
-    });
-    return handleResponse(response);
+    try {
+      console.log('Attempting patient registration with API base:', API_BASE);
+      const response = await fetch(`${API_BASE}/register_patient.php`, createRequestOptions('POST', userData));
+      return handleResponse(response);
+    } catch (error) {
+      console.error('Patient registration error:', error);
+      throw error;
+    }
   },
 
   // Doctors

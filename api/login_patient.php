@@ -5,6 +5,12 @@ error_reporting(E_ALL);
 
 // Use cors.php instead of headers.php for consistent CORS handling
 require_once __DIR__ . '/cors.php';
+
+// Add CORS headers
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type, Authorization');
+
 header('Content-Type: application/json');
 require_once __DIR__ . '/db.php';
 
@@ -49,4 +55,4 @@ try {
 } catch (Exception $e) {
     http_response_code(500);
     echo json_encode(['success' => false, 'error' => 'Server error. Please try again.']);
-} 
+}
