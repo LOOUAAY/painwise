@@ -1,0 +1,378 @@
+/* PatientDetails.css */
+
+.patient-details-container {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Ensure it takes full height of its container */
+  overflow: hidden; /* Prevent container overflow */
+}
+
+.patient-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #f8f9fa; /* Light header background */
+}
+
+.patient-info-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.patient-avatar {
+  width: 45px;
+  height: 45px;
+  background-color: #a5b4fc;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.patient-header-info h2 {
+  margin: 0 0 0.2rem 0;
+  font-size: 1.3rem;
+  color: #333;
+}
+
+.patient-header-info p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: #888;
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+  line-height: 1;
+}
+
+.close-btn:hover {
+  color: #555;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 0 1.5rem;
+  background-color: #ffffff;
+}
+
+.tab {
+  padding: 0.8rem 1.2rem;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: #666;
+  font-weight: 500;
+  font-size: 0.95rem;
+  border-bottom: 3px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  margin-bottom: -1px; /* Overlap border */
+}
+
+.tab:hover {
+  color: #3498db;
+}
+
+.tab.active {
+  color: #3498db;
+  border-bottom-color: #3498db;
+  font-weight: 600;
+}
+
+.tab-content {
+  padding: 1.5rem;
+  overflow-y: auto; /* Allow content scrolling */
+  flex-grow: 1; /* Take remaining vertical space */
+  background-color: #fdfdfd; /* Slightly off-white background for content */
+}
+
+.info-card {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  border: 1px solid #e9ecef;
+}
+
+.info-card h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: #333;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.info-item label {
+  display: block;
+  font-size: 0.85rem;
+  color: #777;
+  margin-bottom: 0.25rem;
+}
+
+.info-item span {
+  font-size: 0.95rem;
+  color: #444;
+}
+
+/* Specific Tab Styles */
+
+/* Overview */
+.appointments-list .appointment-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.appointments-list .appointment-item:last-child {
+  border-bottom: none;
+}
+.appointment-date, .appointment-type, .appointment-status {
+  font-size: 0.9rem;
+  color: #555;
+}
+.appointment-status {
+  font-weight: 500;
+}
+
+/* Medical History */
+.conditions-list .condition-item,
+.allergies-list .allergy-item {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.conditions-list .condition-item:last-child,
+.allergies-list .allergy-item:last-child {
+  border-bottom: none;
+}
+.condition-name, .allergy-name {
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 0.2rem;
+}
+.condition-date, .allergy-severity, .condition-notes {
+  font-size: 0.85rem;
+  color: #777;
+}
+.condition-notes {
+  margin-top: 0.3rem;
+}
+
+/* Prescriptions */
+.prescriptions-list .prescription-item {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  border: 1px solid #e9ecef;
+}
+.prescription-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.prescription-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #3498db;
+}
+.prescription-status {
+  font-size: 0.85rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  font-weight: 500;
+}
+.prescription-status.active {
+  background-color: #d4edda; /* Greenish */
+  color: #155724;
+}
+.prescription-status.inactive {
+  background-color: #f8d7da; /* Reddish */
+  color: #721c24;
+}
+.prescription-details {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Pain Logs */
+.pain-log-viewer {
+  /* Styles for the pain log viewer component if needed */
+}
+.pain-log-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 0.8rem;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+}
+
+.pain-log-navigation button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.pain-log-navigation button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pain-log-navigation button:hover:not(:disabled) {
+  background-color: #2980b9;
+}
+
+.pain-log-navigation span {
+  font-weight: 500;
+  color: #555;
+}
+
+.pain-log-content {
+  /* Styles for individual log content */
+}
+
+/* Messages */
+.messages-section {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Make section take available height */
+}
+
+.messages-list {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  background-color: #f0f4f8; /* Light blue-grey background */
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  max-height: 50vh; /* Limit height */
+}
+
+.message {
+  margin-bottom: 1rem;
+  display: flex;
+}
+
+.message.sent {
+  justify-content: flex-end;
+}
+
+.message.received {
+  justify-content: flex-start;
+}
+
+.message-bubble {
+  max-width: 70%;
+  padding: 0.7rem 1rem;
+  border-radius: 18px;
+  line-height: 1.4;
+  font-size: 0.95rem;
+}
+
+.message.sent .message-bubble {
+  background-color: #3498db;
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.message.received .message-bubble {
+  background-color: #e9ecef;
+  color: #333;
+  border-bottom-left-radius: 4px;
+}
+
+.message-meta {
+  font-size: 0.75rem;
+  color: #888;
+  margin-top: 0.3rem;
+}
+
+.message.sent .message-meta {
+  text-align: right;
+}
+
+.message-form {
+  display: flex;
+  gap: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.message-form textarea {
+  flex-grow: 1;
+  padding: 0.7rem 1rem;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  resize: none;
+  min-height: 40px; /* Start height */
+  max-height: 120px; /* Max height before scroll */
+  line-height: 1.4;
+}
+
+.message-form button {
+  padding: 0.7rem 1.5rem;
+  border-radius: 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.message-form button:hover {
+  background-color: #2980b9;
+}
+
+.loading, .error {
+  padding: 2rem;
+  text-align: center;
+  color: #666;
+}
+
+.error {
+  color: #e74c3c;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tabs {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .tab {
+    padding: 0.8rem;
+  }
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+}
